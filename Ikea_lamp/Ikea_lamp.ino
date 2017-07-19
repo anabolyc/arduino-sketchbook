@@ -4,10 +4,10 @@
 const int SW_DELAY_MS = 100;
 
 const int PIN_SENS_1 = 2;
-const int PIN_SW_1   = 7;
+const int PIN_SENS_2 = 4;
 
-const int PIN_SENS_2 = 3;
-const int PIN_SW_2   = 8;
+const int PIN_SW_1   = 0;
+const int PIN_SW_2   = 1;
 
 typedef struct _btn_state {
   int pin_sensor;

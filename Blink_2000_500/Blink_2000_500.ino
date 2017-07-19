@@ -1,12 +1,17 @@
-const int PIN_LED = 13;
+const int PINS_COUNT = 1;
+const int PIN_START  = 13;
+
+int curr_pin = 0;
 
 void setup() {
-  pinMode(PIN_LED, OUTPUT);
+  for (int i = PIN_START; i < PIN_START + PINS_COUNT; i++)
+    pinMode(i, OUTPUT);
 }
 
 void loop() {
-  digitalWrite(PIN_LED, HIGH);  
-  delay(2000);                      
-  digitalWrite(PIN_LED, LOW);   
-  delay(500);                       
+  int pin_number = PIN_START + (++curr_pin % PINS_COUNT);
+  digitalWrite(pin_number, HIGH);
+  delay(2000);
+  digitalWrite(pin_number, LOW);
+  delay(500);
 }
