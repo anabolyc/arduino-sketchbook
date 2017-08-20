@@ -1,6 +1,6 @@
-const int PIN_RED  = 9;
-const int PIN_GRN  = 5;
-const int PIN_BLU  = 6;
+#include "rgb-lamp-with-sensor.h"
+
+#define DEBUG false
 
 const unsigned int MAX_COL  = 255;
 long fps                    = 60;
@@ -15,17 +15,10 @@ unsigned int nextColor[3] = {0, 0, 0};
 unsigned int currColor[3] = {0, 0, 0};
 unsigned int COL_BLACK[] = {0, 0, 0};
 
-const int TCH_DELAY_MS = 100;
-const int TCH_DELAY_NOJMP = 500;
-
-const int PIN_LED    = 13;
-const int PIN_SENSOR = 3;
-const int PIN_RELAY  = 7;
-//const int PIN_SENSOR_A = A6;
-
 void setup ()
 {
-  Serial.begin(9600);
+  if (DEBUG)
+    Serial.begin(9600);
   delay(1);
 
   pinMode (PIN_LED, OUTPUT);
@@ -40,6 +33,11 @@ void setup ()
   pinMode (PIN_SENSOR, INPUT);
 
   digitalWrite(PIN_RELAY, LOW);
+
+  radio.begin();
+  radio.openWritingPipe(RADIO_ADDR);
+  radio.setPALevel(RF24_PA_MAX);
+  radio.stopListening();
 }
 
 unsigned long lastEvent = 0;
@@ -53,15 +51,18 @@ void loop ()
     unsigned long curr = millis();
     if (curr - lastEvent > TCH_DELAY_MS) {
       ledOn = !ledOn;
-      
+
       digitalWrite(PIN_LED, ledOn);
       digitalWrite(PIN_RELAY, ledOn);
-      
+
+      char msg[] = { (char)ledOn };
+      radio.write(&msg, sizeof(msg));
+
       delay(TCH_DELAY_NOJMP);
     }
- 
+
     lastEvent = curr;
-  } 
+  }
 
   rgb_loop(ledOn);
 }
@@ -74,26 +75,26 @@ void rgb_loop(bool ledState) {
       copyColor(nextColor, lastColor);
       getRandomColor(nextColor);
 
-      /*
-      printColor(lastColor, false);
-      Serial.print("-> ");
-      printColor(nextColor, false);
-      Serial.print("\n"); 
-      */
+      if (DEBUG) {
+        printColor(lastColor, false);
+        Serial.print("-> ");
+        printColor(nextColor, false);
+        Serial.print("\n");
+      }
     }
 
     getCurrentColor(lastColor, nextColor, currColor, frameIndex, transitionFrames);
     setColor(currColor);
 
-    /*
-    Serial.print(frameIndex);
-    Serial.print("\t");
-    Serial.print(transitionFrames);
-    Serial.print("\t");
-    printColor(currColor, true);
-    Serial.print("\n");
-    */
-    
+    if (DEBUG) {
+      Serial.print(frameIndex);
+      Serial.print("\t");
+      Serial.print(transitionFrames);
+      Serial.print("\t");
+      printColor(currColor, true);
+      Serial.print("\n");
+    }
+
     frameIndex++;
     delay(frameDuration);
   } else {
