@@ -6,7 +6,7 @@ const int PIN_RED  = 9;
 const int PIN_GRN  = 5;
 const int PIN_BLU  = 6;
 
-const int PIN_RADIO_CNS = 7;
+const int PIN_RADIO_CNS = 10;
 const int PIN_RADIO_CE  = 8;
 
 const int TCH_DELAY_MS = 100;
