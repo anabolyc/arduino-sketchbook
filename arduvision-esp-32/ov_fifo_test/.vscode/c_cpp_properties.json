@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/home/dronische/.arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266",
+                "/home/dronische/.arduino15/packages/digistump/hardware/avr/1.6.7/cores/license.txt",
+                "/home/dronische/.arduino15/packages/digistump/hardware/avr/1.6.7/cores/pro",
+                "/home/dronische/.arduino15/packages/digistump/hardware/avr/1.6.7/cores/tiny",
+                "/home/dronische/.arduino15/packages/ArduCAM_ESP8266_UNO/hardware/ArduCAM_ESP8266_UNO/2.2.3/cores/esp8266"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": false,
+                "path": [
+                    "/home/dronische/.arduino15/packages/esp8266/hardware/esp8266/2.3.0/cores/esp8266",
+                    "/home/dronische/.arduino15/packages/digistump/hardware/avr/1.6.7/cores/license.txt",
+                    "/home/dronische/.arduino15/packages/digistump/hardware/avr/1.6.7/cores/pro",
+                    "/home/dronische/.arduino15/packages/digistump/hardware/avr/1.6.7/cores/tiny",
+                    "/home/dronische/.arduino15/packages/ArduCAM_ESP8266_UNO/hardware/ArduCAM_ESP8266_UNO/2.2.3/cores/esp8266"
+                ]
+            },
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 3
+}

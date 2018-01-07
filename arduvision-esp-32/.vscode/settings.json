@@ -1,0 +1,5 @@
+{
+    "terminal.integrated.env.linux": {
+        "PATH": "/home/dronische/.platformio/penv/bin:/home/dronische/.local/share/umake/bin:/home/dronische/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/media/storage-unprotected/opt/esp-open-sdk/esptool2"
+    }
+}

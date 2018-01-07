@@ -1,0 +1,5 @@
+{
+    "port": "/dev/ttyUSB0",
+    "board": "esp8266:esp8266:wifinfo",
+    "configuration": "Debug=Disabled,DebugLevel=None,ESPModule=ESP07192,CpuFrequency=160,FlashFreq=40,FlashMode=qio,UploadSpeed=115200"
+}
