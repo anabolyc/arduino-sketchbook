@@ -3,12 +3,14 @@
 #define PIN_LED 13
 #define PIN_RFR 4
 
+#define RF_SPEED_BPS 1024
+
 void setup()
 {
   Serial.begin(9600);
   vw_set_ptt_inverted(true); // Required for DR3100
   vw_set_rx_pin(PIN_RFR);
-  vw_setup(4000);
+  vw_setup(RF_SPEED_BPS);
 
   pinMode(PIN_LED, OUTPUT);
   vw_rx_start(); // Start the receiver PLL running

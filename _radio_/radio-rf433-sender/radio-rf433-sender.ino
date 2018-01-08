@@ -1,8 +1,11 @@
 #include <VirtualWire.h>
 
-#define PIN_LED 1
+#define PIN_LED 13
 #define PIN_RFT 3
-//#define __SERIAL__
+
+#define RF_SPEED_BPS 1024
+
+#define __SERIAL__
 
 char *controller;
 
@@ -14,7 +17,7 @@ void setup() {
   vw_set_ptt_inverted(true);
   vw_set_tx_pin(PIN_RFT);
   
-  vw_setup(4000);
+  vw_setup(RF_SPEED_BPS);
 }
 
 void loop() {
