@@ -1,6 +1,11 @@
 #include <VirtualWire.h>
 
+#ifdef __AVR_ATmega328P__
 #define PIN_LED 13
+#endif
+#ifdef __AVR_ATtiny85__
+#define PIN_LED 1
+#endif
 #define PIN_RFT 3
 
 #define RF_SPEED_BPS 1024

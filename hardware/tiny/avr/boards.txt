@@ -63,6 +63,28 @@ attiny85at16p.build.core=tiny
 
 ###########################################################################
 
+attiny85at16.build.board=AVR_ATTINY85AT16
+attiny85at16.name=ATtiny85 @ 16 MHz  (internal oscillator; BOD disabled)
+
+attiny85at16.upload.tool=arduino:arduinoisp
+
+attiny85at16.upload.maximum_size=8192
+attiny85at16.upload.maximum_data_size=512
+
+attiny85at16.bootloader.low_fuses=0xF1
+attiny85at16.bootloader.high_fuses=0xDF
+attiny85at16.bootloader.extended_fuses=0xFF
+
+attiny85at16.bootloader.path=empty
+attiny85at16.bootloader.file=empty85at16.hex
+attiny85at16.bootloader.tool=arduino:avrdude
+
+attiny85at16.build.mcu=attiny85
+attiny85at16.build.f_cpu=16000000L
+attiny85at16.build.core=tiny
+
+###########################################################################
+
 attiny85at8.build.board=AVR_ATTINY85AT8
 attiny85at8.name=ATtiny85 @ 8 MHz  (internal oscillator; BOD disabled)
 
