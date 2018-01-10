@@ -26,9 +26,7 @@ long transitionFrames = COL_DURATION / frameDuration;
 
 void setup() {
   // Pin mode - output
-  DDRB = DDRB | PIN_COL0B;
-  DDRB = DDRB | PIN_COL1B;
-  DDRB = DDRB | PIN_COL2B;
+  DDRB = DDRB | PIN_COL0B | PIN_COL1B | PIN_COL2B;
 
   // Setup all PWMs
   TCCR0A = PWM_MODE<<COM0A0 | PWM_MODE<<COM0B0 | PWM_FAST_A<<WGM00;
