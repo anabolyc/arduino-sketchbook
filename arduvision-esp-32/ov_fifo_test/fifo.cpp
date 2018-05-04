@@ -20,8 +20,10 @@ void fifo_rrst(void)
 { 
   ENABLE_RRST;
   //_delayNanoseconds(5);
+  _delayMicroseconds(1);
   SET_RCLK_H;
   //_delayNanoseconds(5);
+  _delayMicroseconds(1);
   SET_RCLK_L;
   DISABLE_RRST;
 }
@@ -43,8 +45,10 @@ uint8_t fifo_readByte(void)
   SET_RCLK_H;
   val = DATA_PINS;
   //_delay_cycles(10);
+  _delayMicroseconds(1);
   SET_RCLK_L;
   //_delay_cycles(10);
+  _delayMicroseconds(1);
   return val;
 }
 
@@ -56,8 +60,10 @@ uint8_t fifo_readBytes(uint8_t *destBuf, unsigned long nBytes)
     SET_RCLK_H;
     *bufIndex = DATA_PINS;
     //_delay_cycles(10);
+    _delayMicroseconds(1);
     SET_RCLK_L;
     //_delay_cycles(10);
+    _delayMicroseconds(1);
     bufIndex++;
     nBytes--;
   }

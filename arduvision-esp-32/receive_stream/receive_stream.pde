@@ -21,7 +21,7 @@ requestStatus_t reqStatus = requestStatus_t.IDLE;
 
 // incoming serial 
 byte[]   ackBuff = new byte[G_DEF.ACK_BUF_LEN];
-byte[][] pix     = new byte[G_DEF.F_H][G_DEF.MAX_ROW_LEN];
+byte[][] pix     = new byte[G_DEF.F_H][G_DEF.MAX_ROW_LEN + 1];
 
 double waitTimeout    = 0;
 double fpsTimeStamp   = 0;
@@ -147,6 +147,15 @@ void parseSerialData() {
       int bytesRead = serialPort.readBytes(pix[currRow]);
       println("#", frameIndex, bytesRead, "bytes read, line: ", currRow);
       serialPort.clear();
+      
+      //if (request == STREAM0PPB) {
+        log.print("#" + frameIndex + "\t" + currRow + "\t");
+        for( int i = 0; i < request.getParam(); i++) {
+          log.print(pix[currRow][i] + " ");
+        }
+        log.println();
+      //}
+      
       currRow++;
     } else {
       //println("#", bytesAvail, "out of", request.getParam(), "bytes available, line: ", currRow);
@@ -185,6 +194,12 @@ void buff2pixFrame(byte[][] pixBuff, PImage dstImg, PImage yuvImg, request_t req
     for (int y = 0, l = 0, x = 0; y < G_DEF.F_H; y++, x = 0)
       while (x < reqParam) {
 
+        if (x == 0) {
+          int d = pixBuff[y][x];
+          if (abs(d) > 50)
+            x++;
+        }
+          
         int Y0 = int(pixBuff[y][x++]);
         int V  = int(pixBuff[y][x++]);
         int Y1 = int(pixBuff[y][x++]);
@@ -195,10 +210,10 @@ void buff2pixFrame(byte[][] pixBuff, PImage dstImg, PImage yuvImg, request_t req
         yuvImg.pixels[l]   = color(Y1, U, V);
         dstImg.pixels[l++] = YUV2RGB(Y1, U, V);
 
-        print("#", frameIndex, "(", x, ",", y, ") = ");
-        log.print("#" + frameIndex + " x:" + x + " y:" + y);
-        println(hex(Y0), Y0, hex(Y1), Y1, hex(U), U, hex(V), V);
-        log.println(" Y0:" + Y0 + " Y1:" + Y1 + " U:" + U + " V:" + V); 
+        //print("#", frameIndex, "(", x, ",", y, ") = ");
+        //log.print("#" + frameIndex + "\tx\t" + x + "\ty\t" + y);
+        //println(hex(Y0), Y0, hex(Y1), Y1, hex(U), U, hex(V), V);
+        //log.println("\tY0\t" + Y0 + "\tY1\t" + Y1 + "\tU\t" + U + "\tV\t" + V); 
       }
     break;
   case STREAM1PPB: 
@@ -283,7 +298,7 @@ void drawInfo() {
     String rgbString = "RGB:" + int(red(p)) + " " + int(green(p)) + " " + int(blue(p));
     String yuvString = "YUV:" + int(red(p0)) + " " + int(green(p0)) + " " + int(blue(p0));
     text(coordsStr, 200, height-G_DEF.FONT_BKG_SIZE);
-    text(rgbString, 300, height-G_DEF.FONT_BKG_SIZE);
+    text(rgbString, 320, height-G_DEF.FONT_BKG_SIZE);
     text(yuvString, 450, height-G_DEF.FONT_BKG_SIZE);
   }
 

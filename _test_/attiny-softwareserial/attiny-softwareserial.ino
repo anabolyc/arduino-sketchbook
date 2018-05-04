@@ -1,7 +1,10 @@
+// OUTPUT is pin PB3
+
 unsigned long time = 0;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
+  Serial.println();
 }
 
 void loop() {

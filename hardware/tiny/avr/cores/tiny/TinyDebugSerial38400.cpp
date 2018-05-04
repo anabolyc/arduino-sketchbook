@@ -23,4 +23,8 @@
 
 #include "TinyDebugSerial.h"
 
+#if TINY_DEBUG_SERIAL_SUPPORTED
+
 TinyDebugSerialWriter_38400 tdsw38400;
+
+#endif

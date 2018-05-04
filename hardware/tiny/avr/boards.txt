@@ -8,30 +8,30 @@
 #
 ###########################################################################
 
-attiny85at16e.build.board=AVR_ATTINY85AT16E
-attiny85at16e.name=ATtiny85 @ 16 MHz  (external crystal; 4.3 V BOD)
+#attiny85at16e.build.board=AVR_ATTINY85AT16E
+#attiny85at16e.name=ATtiny85 @ 16 MHz  (external crystal; 4.3 V BOD)
 
-attiny85at16e.upload.tool=arduino:arduinoisp
+#attiny85at16e.upload.tool=arduino:arduinoisp
 
-attiny85at16e.upload.maximum_size=8192
-attiny85at16e.upload.maximum_data_size=512
+#attiny85at16e.upload.maximum_size=8192
+#attiny85at16e.upload.maximum_data_size=512
 
 # Ext. Crystal Osc.; Frequency 8.0- MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms; [CKSEL=1111 SUT=11]
 # Brown-out detection level at VCC=4.3 V; [BODLEVEL=100]
 # Preserve EEPROM memory through the Chip Erase cycle; [EESAVE=0]
 # Serial program downloading (SPI) enabled; [SPIEN=0]
 
-attiny85at16e.bootloader.low_fuses=0xFF
-attiny85at16e.bootloader.high_fuses=0xD4
-attiny85at16e.bootloader.extended_fuses=0xFF
+#attiny85at16e.bootloader.low_fuses=0xFF
+#attiny85at16e.bootloader.high_fuses=0xD4
+#attiny85at16e.bootloader.extended_fuses=0xFF
 
-attiny85at16e.bootloader.path=empty
-attiny85at16e.bootloader.file=empty85at16.hex
-attiny85at16e.bootloader.tool=arduino:avrdude
+#attiny85at16e.bootloader.path=empty
+#attiny85at16e.bootloader.file=empty85at16.hex
+#attiny85at16e.bootloader.tool=arduino:avrdude
 
-attiny85at16e.build.mcu=attiny85
-attiny85at16e.build.f_cpu=16000000L
-attiny85at16e.build.core=tiny
+#attiny85at16e.build.mcu=attiny85
+#attiny85at16e.build.f_cpu=16000000L
+#attiny85at16e.build.core=tiny
 
 
 ###########################################################################
@@ -64,7 +64,7 @@ attiny85at16p.build.core=tiny
 ###########################################################################
 
 attiny85at16.build.board=AVR_ATTINY85AT16
-attiny85at16.name=ATtiny85 @ 16 MHz  (internal oscillator; BOD disabled)
+attiny85at16.name=ATtiny85 @ 16 MHz  (internal osc; BOD dis)
 
 attiny85at16.upload.tool=arduino:arduinoisp
 
@@ -86,7 +86,7 @@ attiny85at16.build.core=tiny
 ###########################################################################
 
 attiny85at8.build.board=AVR_ATTINY85AT8
-attiny85at8.name=ATtiny85 @ 8 MHz  (internal oscillator; BOD disabled)
+attiny85at8.name=ATtiny85 @ 8 MHz  (internal osc; BOD dis)
 
 attiny85at8.upload.tool=arduino:arduinoisp
 
@@ -113,7 +113,7 @@ attiny85at8.build.core=tiny
 ###########################################################################
 
 attiny85at1.build.board=AVR_ATTINY85AT1
-attiny85at1.name=ATtiny85 @ 1 MHz  (internal oscillator; BOD disabled)
+attiny85at1.name=ATtiny85 @ 1 MHz (int osc; BOD dis)
 
 attiny85at1.upload.tool=arduino:arduinoisp
 
@@ -140,28 +140,28 @@ attiny85at1.build.core=tiny
 
 ###########################################################################
 
-attiny85at128.build.board=AVR_ATTINY85AT128
-attiny85at128.name=ATtiny85 @ 128 KHz  (watchdog oscillator; 1.8 V BOD)
+attiny85at1_1_8.build.board=AVR_ATTINY85AT1_1_8
+attiny85at1_1_8.name=ATtiny85 @ 1 MHz (int osc; BOD 1.8V)
 
-attiny85at128.upload.tool=arduino:arduinoisp
+attiny85at1_1_8.upload.tool=arduino:arduinoisp
 
-attiny85at128.upload.maximum_size=8192
-attiny85at128.upload.maximum_data_size=512
+attiny85at1_1_8.upload.maximum_size=8192
+attiny85at1_1_8.upload.maximum_data_size=512
 
-# WD. Osc. 128 kHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 0 ms; [CKSEL=0100 SUT=00]
-# Brown-out detection level at VCC=1.8 V; [BODLEVEL=110]
+# Default clock (slowly rising power; long delay to clock; 8 MHz internal; divide clock by 8)
+# Int. RC Osc. 8 MHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 64 ms; [CKSEL=0010 SUT=10]; default value
+# Divide clock by 8 internally; [CKDIV8=0]
+# Brown-out detection 1.8V; [BODLEVEL=110]
 # Preserve EEPROM memory through the Chip Erase cycle; [EESAVE=0]
-# Serial program downloading (SPI) enabled; [SPIEN=0]
 
-attiny85at128.bootloader.low_fuses=0xC4
-attiny85at128.bootloader.high_fuses=0xD6
-attiny85at128.bootloader.extended_fuses=0xFF
+attiny85at1_1_8.bootloader.low_fuses=0x62
+attiny85at1_1_8.bootloader.high_fuses=0xD6
+attiny85at1_1_8.bootloader.extended_fuses=0xFF
 
-attiny85at128.bootloader.path=empty
-attiny85at128.bootloader.file=empty85at1.hex
-attiny85at128.bootloader.tool=arduino:avrdude
+attiny85at1_1_8.bootloader.path=empty
+attiny85at1_1_8.bootloader.file=empty85at1.hex
+attiny85at1_1_8.bootloader.tool=arduino:avrdude
 
-attiny85at128.build.mcu=attiny85
-attiny85at128.build.f_cpu=128000L
-attiny85at128.build.core=tiny
-
+attiny85at1_1_8.build.mcu=attiny85
+attiny85at1_1_8.build.f_cpu=1000000L
+attiny85at1_1_8.build.core=tiny

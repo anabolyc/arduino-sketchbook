@@ -649,6 +649,8 @@ class TinyDebugSerialWriter_16_115200 : public TinyDebugSerialWriter
     2, 18, 2
     9, 3, 1
 */
+#else
+  #define TINY_DEBUG_SERIAL_SUPPORTED 0
 #endif
 
 

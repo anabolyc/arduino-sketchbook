@@ -115,9 +115,9 @@ void __inline__ vsyncIntFunc() {
   }
   else {
     ENABLE_WRST;
-    //__delay_cycles(500);
+    _delayMicroseconds(1);
     SET_RCLK_H;
-    //__delay_cycles(100);
+    _delayMicroseconds(1);
     SET_RCLK_L;
     DISABLE_WRST;
     _delay_cycles(10);
@@ -141,7 +141,7 @@ void processRequest() {
         serialPtr->write(rowBuf, serialRequest);
         serialPtr->write(LF);
       }
-      serialPtr->println("<<< SEND_0PPB");
+      ///serialPtr->println("<<< SEND_0PPB");
       break;
 
     case SEND_1PPB:
@@ -150,47 +150,8 @@ void processRequest() {
         serialPtr->write(rowBuf, serialRequest);
         serialPtr->write(LF);
       }
-      serialPtr->println("<<< SEND_1PPB");
+      ///serialPtr->println("<<< SEND_1PPB");
       break;
-
-    //case SEND_2PPB:
-    //  for (int i = 0; i < fH; i++) {
-    //    fifo_readRow2ppb(rowBuf, rowBuf + serialRequest);
-    //    serialPtr->write(rowBuf, serialRequest);
-    //    serialPtr->write(LF);
-    //  }
-    //  serialPtr->println("<<< SEND_2PPB");
-    //  break;
-
-    //case SEND_4PPB:
-    //  for (int i = 0; i < fH; i++) {
-    //    fifo_readRow4ppb(rowBuf, rowBuf + serialRequest);
-    //    serialPtr->write(rowBuf, serialRequest);
-    //    serialPtr->write(LF);
-    //  }
-    //  serialPtr->println("<<< SEND_4PPB");
-    //  break;
-
-    //case SEND_8PPB:
-    //  for (int i = 0; i < fH; i++) {
-    //    fifo_readRow8ppb(rowBuf, rowBuf + serialRequest, thresh);
-    //    serialPtr->write(rowBuf, serialRequest);
-    //    serialPtr->write(LF);
-    //  }
-    //  serialPtr->println("<<< SEND_8PPB");
-    //  break;
-
-    //case SEND_DARK:
-    //  fifo_getDark(rowBuf, fW, fH, TRACK_BORDER, thresh);
-    //  serialPtr->write(rowBuf, 4);
-    //  serialPtr->write(LF);
-    //  break;
-    
-    //case SEND_FPS:
-    //  calcFPS(fps);
-    //  serialPtr->print(fps, DEC);
-    //  serialPtr->write(LF);
-    //  break;
 
     default:
       break;

@@ -1,4 +1,9 @@
-#include <VirtualWire.h>
+#include "Receiver.h"
+
+#define RF_SPEED_BPS 984
+
+#define SERIAL_SPEED 9600
+#define __SERIAL__
 
 #ifdef __AVR_ATmega328P__
 #define PIN_LED 13
@@ -9,40 +14,90 @@
 #define PIN_RFR 3
 #endif
 
-#define RF_SPEED_BPS 1024
+#define MESSAGE_LEN 4
+uint8_t CMD_ON [MESSAGE_LEN] = {"sa5"};
+uint8_t CMD_OFF[MESSAGE_LEN] = {"xHM"};
 
-//#define __SERIAL__
+Receiver receiver(PIN_RFR, RF_SPEED_BPS);
 
 void setup()
 {
-  #ifdef __SERIAL__
-  Serial.begin(9600);
-  #endif
-  vw_set_ptt_inverted(true); // Required for DR3100
-  vw_set_rx_pin(PIN_RFR);
-  vw_setup(RF_SPEED_BPS);
-
+#ifdef __SERIAL__
+  Serial.begin(SERIAL_SPEED);
+  Serial.println();
+  Serial.println(">_<");
+#endif
+  receiver.start();
   pinMode(PIN_LED, OUTPUT);
-  vw_rx_start(); // Start the receiver PLL running
 }
+
+long msg_count = 0;
+
+bool flag = 0;
 
 void loop()
 {
-  uint8_t buf[VW_MAX_MESSAGE_LEN];
-  uint8_t buflen = VW_MAX_MESSAGE_LEN;
+    uint8_t buf[MESSAGE_LEN];
+    uint8_t buflen = MESSAGE_LEN;
 
-  if (vw_get_message(buf, &buflen)) // Non-blocking
-  {
+    if (receiver.message(buf, &buflen)) {
     #ifdef __SERIAL__
-    Serial.print(" < ");
-    Serial.println((char)buf[0]);
+      Serial.print(" << ");
+      Serial.print(msg_count++);
+      Serial.print(" ");
+      for (int i = 0; i < buflen; i++)
+        Serial.print((char)buf[i]);
+      Serial.println();
     #endif
 
-    if (buf[0] == '1') {
-      digitalWrite(PIN_LED, HIGH);
+      if (str_cmp(buf, CMD_ON)) {
+        digitalWrite(PIN_LED, HIGH);
+      }
+
+      if (str_cmp(buf, CMD_OFF)) {
+        digitalWrite(PIN_LED, LOW);
+      }
     }
-    if (buf[0] == '0') {
-      digitalWrite(PIN_LED, LOW);
-    }
-  }
+  /*
+  
+  if (!flag) {
+    drop_settings();
+    flag = true;
+  } */
+}
+
+bool str_cmp(uint8_t* a, uint8_t* b) {
+  for (int i = 0; i < MESSAGE_LEN; i++)
+    if (a[i] != b[i])
+      return false;
+  return true;
+}
+
+void drop_settings() {
+#ifdef __SERIAL__
+
+  // RF speed
+  Serial.print("RF_SPEED_BPS = ");
+  Serial.println(RF_SPEED_BPS);
+
+  //prescaler
+  uint8_t b = TCCR0B;
+  Serial.print("TCCR0B = ");
+  Serial.print(b, DEC);
+  Serial.print(" ");
+  Serial.print(b, HEX);
+  Serial.print(" ");
+  Serial.print(b, BIN);
+  Serial.println(" ");
+
+  //nticks
+  uint8_t a = OCR0A;
+  Serial.print("OCR0A = ");
+  Serial.print(a, DEC);
+  Serial.print(" ");
+  Serial.print(a, HEX);
+  Serial.print(" ");
+  Serial.print(a, BIN);
+  Serial.println(" ");
+#endif
 }

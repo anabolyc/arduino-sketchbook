@@ -51,6 +51,9 @@
 #elif F_CPU == 1000000
   // 1 MHz / 8 = 125 KHz
   #define ADC_ARDUINO_PRESCALER   ADC_Prescaler_Value_8
+#elif F_CPU < 400000L
+  // 128 kHz / 2 = 64 KHz -> This is the closest you can get, the prescaler is 2
+  #define ADC_ARDUINO_PRESCALER   ADC_Prescaler_Value_2
 #else
   #error Add an entry for the selected processor speed.
 #endif
