@@ -30,10 +30,10 @@ bool Adafruit_BME280::begin(uint8_t a) {
 
   if (read8(BME280_REGISTER_CHIPID) != 0x60)
     return false;
-/*
+
   readCoefficients();
   write8(BME280_REGISTER_CONTROLHUMID, 0x03); // Set before CONTROL (DS 5.4.3)
-  write8(BME280_REGISTER_CONTROL, 0x3F); */
+  write8(BME280_REGISTER_CONTROL, 0x3F);
   return true;
 }
 
@@ -65,7 +65,7 @@ uint8_t Adafruit_BME280::read8(byte reg)
   Wire.endTransmission();
   Wire.requestFrom((uint8_t)_i2caddr, (byte)1);
   value = Wire.read();
-  Wire.endTransmission();
+  //Wire.endTransmission();
 
   return value;
 }
@@ -84,7 +84,7 @@ uint16_t Adafruit_BME280::read16(byte reg)
   Wire.endTransmission();
   Wire.requestFrom((uint8_t)_i2caddr, (byte)2);
   value = (Wire.read() << 8) | Wire.read();
-  Wire.endTransmission();
+  //Wire.endTransmission();
 
   return value;
 }

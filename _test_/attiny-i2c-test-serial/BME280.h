@@ -25,8 +25,8 @@
 
 #include <Sensor_Master.h>
 
-#include "TinyWire.h"
-#define Wire TinyWire
+#include "TinyWireM.h"
+#define Wire TinyWireM
 
 /*=========================================================================
     I2C ADDRESS/BITS
