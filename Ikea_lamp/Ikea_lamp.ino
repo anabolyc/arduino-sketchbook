@@ -1,10 +1,10 @@
-#define DEBUG true
+#define DEBUG false
 #define BUTTONS_COUNT 2
 
-const int SW_DELAY_MS = 100;
+const int SW_DELAY_MS = 50;
 
 const int PIN_SENS_1 = 2;
-const int PIN_SENS_2 = 4;
+const int PIN_SENS_2 = 3;
 
 const int PIN_SW_1   = 0;
 const int PIN_SW_2   = 1;

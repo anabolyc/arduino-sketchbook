@@ -5,15 +5,15 @@
 #define PIN_POWR_MOIS 4
 #define LED_PIN_INV    false
 
-#define MIN_SENS_VALUE 200
-#define MAX_SENS_VALUE 900
+#define MIN_SENS_VALUE 0
+#define MAX_SENS_VALUE 450
 
 #define LED_ON_MD      0
-#define LED_OFF_MD     8
+#define LED_OFF_MD     6
 
 const int PIN_MAP_LEN = 3;
 const int PIN_MAP[] = {
-  2, 1, 0
+  2, 0, 1
 };
 
 void setup() {
